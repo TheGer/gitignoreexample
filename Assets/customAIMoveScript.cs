@@ -45,9 +45,16 @@ public class customAIMoveScript : MonoBehaviour
         graphParent.GetComponent<AstarPath>().Scan();
 
         //generate the initial path
+        StartCoroutine(startPathing());
+
+    }
+
+
+    IEnumerator startPathing()
+    {
         pathToFollow = seeker.StartPath(transform.position, target.position);
 
-		//modified to wait for seeker is done.
+        //modified to wait for seeker is done.
         yield return seeker.IsDone();
 
         //move the green box in a coroutine.  Runs indefinitely
